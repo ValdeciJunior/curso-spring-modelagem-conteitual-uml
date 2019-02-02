@@ -17,6 +17,8 @@ public class CursomcApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CategoriaRepository catRepo;
+	
+	@Autowired
 	private ProdutoRepository proRepo;
 	
 

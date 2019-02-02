@@ -35,11 +35,12 @@ public class Produto implements Serializable {
 	private List<Categoria> categorias = new ArrayList<>();
 
 	public Produto(Integer id, String nome, Double preco) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
 	}
+	
+	public Produto() {};
 
 	public Integer getId() {
 		return id;
