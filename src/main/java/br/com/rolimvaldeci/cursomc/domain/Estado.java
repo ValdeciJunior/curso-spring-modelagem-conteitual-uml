@@ -9,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Estado  implements Serializable {
@@ -23,7 +22,7 @@ public class Estado  implements Serializable {
 	
 	/* Não é ManyToMany porquê não é um relacionamento muitos para muitos(Não cria uma terceira tabela) esse lado aqui é o
 	 * inverso do ManyToOne que está em cidade */
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="estado")
 	private List<Cidade> cidades = new ArrayList<>();
 

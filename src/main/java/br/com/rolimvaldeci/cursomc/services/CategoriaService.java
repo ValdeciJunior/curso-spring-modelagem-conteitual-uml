@@ -12,15 +12,20 @@ import br.com.rolimvaldeci.cursomc.services.exceptions.ObjectNotFoundException;
 @Service
 public class CategoriaService {
 	@Autowired
-	private CategoriaRepository categoriaRepository;
+	private CategoriaRepository repo;
 	
 	public Categoria get(Integer id) {
 		/*
 		 * O findById retorna na verdade um Optional<Categoria>
 		 * */
-		Optional<Categoria> obj = categoriaRepository.findById(id);
+		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+	}
+	
+	public Categoria cadastrar(Categoria obj) {
+		obj.setId(null);
+		return repo.save(obj);
 	}
 	
 }
