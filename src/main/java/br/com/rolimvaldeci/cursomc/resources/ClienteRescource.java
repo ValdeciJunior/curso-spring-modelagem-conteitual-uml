@@ -22,7 +22,7 @@ public class ClienteRescource {
 	private ClienteService service;
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> get(@PathVariable("id") Integer id) {
+	public ResponseEntity<Cliente> get(@PathVariable("id") Integer id) {
 		return ResponseEntity.ok().body(service.get(id));
 		
 	}

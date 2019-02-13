@@ -22,7 +22,7 @@ public class PedidoRescource {
 	private PedidoService pedidoService;
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> get(@PathVariable("id") Integer id) {
+	public ResponseEntity<Pedido> get(@PathVariable("id") Integer id) {
 		return ResponseEntity.ok().body(pedidoService.get(id));
 		
 	}
