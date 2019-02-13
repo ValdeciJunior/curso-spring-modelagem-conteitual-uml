@@ -13,6 +13,7 @@ import br.com.rolimvaldeci.cursomc.domain.Cidade;
 import br.com.rolimvaldeci.cursomc.domain.Cliente;
 import br.com.rolimvaldeci.cursomc.domain.Endereco;
 import br.com.rolimvaldeci.cursomc.domain.Estado;
+import br.com.rolimvaldeci.cursomc.domain.ItemPedido;
 import br.com.rolimvaldeci.cursomc.domain.Pagamento;
 import br.com.rolimvaldeci.cursomc.domain.PagamentoComBoleto;
 import br.com.rolimvaldeci.cursomc.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import br.com.rolimvaldeci.cursomc.repositories.CidadeRepository;
 import br.com.rolimvaldeci.cursomc.repositories.ClienteRepository;
 import br.com.rolimvaldeci.cursomc.repositories.EnderecoRepository;
 import br.com.rolimvaldeci.cursomc.repositories.EstadoRepository;
+import br.com.rolimvaldeci.cursomc.repositories.ItemPedidoRepository;
 import br.com.rolimvaldeci.cursomc.repositories.PagamentoRepository;
 import br.com.rolimvaldeci.cursomc.repositories.PedidoRepository;
 import br.com.rolimvaldeci.cursomc.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class CursomcApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PedidoRepository pedRepo;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 
 	public static void main(String[] args) {
@@ -119,6 +124,18 @@ public class CursomcApplication implements CommandLineRunner {
 		pedRepo.saveAll(Arrays.asList(ped1, ped2));
 		pagRepo.saveAll(Arrays.asList(pagto1, pagto2));
 		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p2.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 
 }
