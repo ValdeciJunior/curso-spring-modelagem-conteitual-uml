@@ -1,5 +1,6 @@
 package br.com.rolimvaldeci.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,10 @@ public class CategoriaService {
 			throw new DateIntegrityException("Não é possível excluir uma categoria que tem produtos");
 		}
 		
+	}
+	
+	public List<Categoria> categorias(){
+		return repo.findAll();
 	}
 	
 }

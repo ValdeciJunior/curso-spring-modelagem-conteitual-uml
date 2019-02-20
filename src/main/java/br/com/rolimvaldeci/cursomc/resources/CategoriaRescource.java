@@ -3,6 +3,7 @@ package br.com.rolimvaldeci.cursomc.resources;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.rolimvaldeci.cursomc.domain.Categoria;
+import br.com.rolimvaldeci.cursomc.dto.CategoriaDTO;
 import br.com.rolimvaldeci.cursomc.services.CategoriaService;
 
 @RestController
@@ -52,6 +54,13 @@ public class CategoriaRescource {
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<CategoriaDTO>> categorias() {
+		List<Categoria> list = service.categorias();
+		List<CategoriaDTO> categoriaDTOs = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(categoriaDTOs);
 	}
 	
 }
